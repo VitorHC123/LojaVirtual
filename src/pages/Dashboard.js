@@ -32,7 +32,7 @@ const Dashboard = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registrar" element={<Registrar />} />
                 <Route element={<Middleware />}>
-                    {/* <Route path="/" element={<Dashboard />} /> */}
+                    <Route path="/" element={<Dashboard />} />
                     {/* <Route path="/produtos" element={<Produtos />} /> */}
                 </Route>
             </Routes>

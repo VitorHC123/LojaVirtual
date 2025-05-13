@@ -1,58 +1,172 @@
-
-
 .navbar {
-    background-color: #1c1c1c;
-    padding: 1.5rem 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-  
-  .navbar-logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ff6f00;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 2rem;
-  }
-  
-  .navbar-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .navbar-links a:hover {
-    color: #ff6f00;
-    border-bottom: 2px solid #ff6f00;
-  }
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 1.2rem 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  .cart-icon {
-    font-size: 1.6rem; 
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #ff6f00;
+  transition: width 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #ff6f00;
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+.cart-icon {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.cart-icon:hover {
+  transform: scale(1.15);
+  color: #ff6f00;
+}
+
+
+
+
+
+
+.navbar-links-subnav {
+  display: flex;
+  gap: 20rem;
+}
+
+.navbar-links-subnav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-links-subnav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #ff6f00;
+  transition: width 0.3s ease;
+}
+
+.navbar-links-subnav a:hover {
+  color: #ff6f00;
+}
+
+.navbar-links-subnav a:hover::after {
+  width: 100%;
+}
+
+
+
+
+
+
+.tooltip-container {
+    position: relative;
     display: inline-block;
-    vertical-align: middle;
-    transition: transform 0.3s ease;
-    margin-top: -10px;
-  }
-  
-  .cart-icon:hover {
-    transform: scale(1.1);
+    z-index: 100;
+}
+
+.atendimento-link {
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 5px;
+    padding: 40px;
+    z-index: 100;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    white-space: normal;
+    max-width: 250px;
+}
+
+.tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    z-index: 100;
+}
+
+.atendimento-link:hover {
     color: #ff6f00;
-  }
-  
+    text-decoration: underline;
+}

@@ -1,50 +1,75 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import '../styles/AuthForm.css'
 
 const Login = () => {
-    var [usuario, setUsuario] = useState('')
-    var [senha, setSenha] = useState('')
+    const [usuario, setUsuario] = useState('');
+    const [senha, setSenha] = useState('');
     const navigate = useNavigate();
 
     const validaUsuario = async () => {
-        var url = "https://backend-completo.app/app/login"
-        var dados = {
-            usuario,
-            senha
+        if (!usuario || !senha) {
+            alert("Por favor, preencha todos os campos.");
+            return;
         }
 
-        await axios.post(
-            url,
-            dados
-        ).then(retorno =>{
-            console.log( retorno )
-            if (retorno.data.error){
-                alert(retorno.data.error)
-                return
-            }
-            if(retorno.data.token){
-                localStorage.setItem("Cliente", retorno.data.token)
-            }
-        })
-    }
+        const url = "https://backend-completo.vercel.app/app/login";
+        const dados = { usuario, senha };
 
-    const irParaRegistrar = () => {
-        navigate('/registrar');  
+        try {
+            const retorno = await axios.post(url, dados);
+            console.log(retorno);
+
+            if (retorno.data.token) {
+                localStorage.setItem("Cliente", retorno.data.token);
+                navigate('/Dashboard');
+            } else if (retorno.data.error) {
+                alert(`Erro: ${retorno.data.error}`);
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.error) {
+                alert(`Erro: ${error.response.data.error}`);
+            } else {
+                alert("Erro ao conectar. Tente novamente mais tarde.");
+            }
+        }
     };
 
+    const irParaRegistrar = () => {
+        navigate('/registrar');
+    };
 
-    return(
-        <div>
-            <h1>Faça seu login</h1>
+    return (
+        <div className="auth-container">
+            <div className="auth-box">
+                <h1>Faça seu login</h1>
 
-            <input type="text" placeholder="Usuario" onChange={(e) => setUsuario(e.target.value)}/>
-            <input type="password" placeholder="Senha" onChange={(e) => setSenha(e.target.value)}/>
-            <input type="button" value="Logar" onClick={() => validaUsuario()}/>
-            <input type="button" value="Registrar" onClick={ irParaRegistrar }/>
+                <input
+                    type="text"
+                    placeholder="Usuário"
+                    onChange={(e) => setUsuario(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Senha"
+                    onChange={(e) => setSenha(e.target.value)}
+                />
+                <input
+                    type="button"
+                    value="Logar"
+                    onClick={validaUsuario}
+                />
+                <input
+                    type="button"
+                    value="Registrar"
+                    onClick={irParaRegistrar}
+                    className="secondary-button"
+                />
+            </div>
         </div>
-    )
+    );
 
-}
+};
 
-export default Login
+export default Login;
